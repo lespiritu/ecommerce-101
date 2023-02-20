@@ -1,0 +1,13 @@
+.log-in{
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+
+    padding-bottom: 50px;
+
+
+}

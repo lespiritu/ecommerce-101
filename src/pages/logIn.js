@@ -44,6 +44,7 @@ export default function LogIn(){
                 
             }
             else{
+            
                 localStorage.setItem('token', response.data.auth)
 
                 retrieveUsreDetails(localStorage.getItem('token'));
@@ -51,8 +52,13 @@ export default function LogIn(){
                 setEmail('');
                 setPassword('');
                
-                
-                navigate('/')
+                if(response.data.result.isAdmin){
+                    navigate('/adminDashBoard')
+                }
+                else{
+                    navigate('/')
+                }
+               
             }
         })
 
@@ -71,7 +77,6 @@ export default function LogIn(){
             )
        
             .then(response => {
-                console.log(response);
                 setUser(response.data)
             })
         }

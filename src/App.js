@@ -10,6 +10,9 @@ import Home from './pages/home';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Signup from './pages/signup';
+import PageNotFound from './pages/pageNotFound';
+import AdminDashBoard from './pages/admindashboard/adminDashBoard';
+import AddProducts from './pages/admindashboard/addProduct';
 
 function App() {
  
@@ -27,7 +30,7 @@ function App() {
 
         .then(response => {
         
-            if(localStorage.getItem('token') !== null){
+            if(localStorage.getItem('token') === null){
               setUser(response.data)
             }
             else{
@@ -47,11 +50,15 @@ function App() {
         <Container>
           <Routes>
               
-              <Route path='/login' element={<LogIn/>}/>
+              <Route path='login' element={<LogIn/>}/>
 
-              <Route path='/signup' element={<Signup/>}/>
+              <Route path='signup' element={<Signup/>}/>
               <Route path='/' element={<Home/>}/>
-              <Route path='*' element = {<h1>page not found</h1>} />
+              <Route path='*' element = {<PageNotFound/>} />
+
+              <Route path='/adminDashBoard' element={<AdminDashBoard/>}>
+                <Route path='addProduct' element={<AddProducts/>}/>
+              </Route>
 
           </Routes>
           </Container>
