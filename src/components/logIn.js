@@ -6,7 +6,7 @@ import './logIn.css'
 
 import UserContext from "../context/userContext";
 
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -17,7 +17,7 @@ export default function LogIn(){
     const [password, setPassword] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
 
-    const { setUserData} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
    
 
     function logIn(event){
@@ -44,19 +44,15 @@ export default function LogIn(){
                 
             }
             else{
-                localStorage.setItem('userToken', response.data.auth)
+                localStorage.setItem('token', response.data.auth)
+
+                retrieveUsreDetails(localStorage.getItem('token'));
+
                 setEmail('');
                 setPassword('');
-
-        
-                setUserData(response.data);
-            
+               
                 
-            
-
-                navigate('/testing')
-             
-                
+                navigate('/')
             }
         })
 
@@ -65,9 +61,25 @@ export default function LogIn(){
         // localStorage.setItem("email", email);
         // setUser(localStorage.getItem("email"))
         
+        const retrieveUsreDetails = (token)=>{
+            axios.get(`https://e-commerse-espiritu.onrender.com/user/details`,
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
        
+            .then(response => {
+                console.log(response);
+                setUser(response.data)
+            })
+        }
 
     }
+
+
+    
 
     useEffect(()=>{
         if(email !=='' && password !==''){
@@ -77,8 +89,10 @@ export default function LogIn(){
         }
     },[email, password])
 
-  
+
     return(
+
+        user? <Navigate to = "*" /> :
         <div className="log-in">
             <h2>Welcome!</h2>
             <span>Login to continue</span>

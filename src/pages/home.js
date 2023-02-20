@@ -8,7 +8,7 @@ export default function Home(){
     return(
         <>
             <h1>Home</h1>
-            <h3>{userData ?  userData.message : ''}</h3>
+            <h3>{userData ?  userData.message : 'not log in'}</h3>
             
         </>
     )

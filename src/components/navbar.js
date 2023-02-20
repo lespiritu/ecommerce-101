@@ -16,14 +16,14 @@ import { useNavigate } from 'react-router-dom';
 // component function
 export default function NavBar(){
     const navigate = useNavigate();
-    const {userData, setUserData} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
 
 
     // code for log out
     function logOut(event){
         event.preventDefault();
-        setUserData(null);
-        localStorage.removeItem("userToken");
+        setUser(null);
+        localStorage.removeItem("token");
         navigate('/')
     }
 
@@ -40,17 +40,17 @@ export default function NavBar(){
 
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ms-auto ">
-                                {!userData && 
+                                {!user && 
                                     <>
                                     <Nav.Link as = {Link} to="/login">LogIn</Nav.Link>
                                     <Nav.Link  href="/">Signup</Nav.Link>
                                     </>
                                 }
                                 
-                              {userData && 
+                              {user && 
                                 <Nav>
-                                  {!userData.result.isAdmin && <Nav.Link> <IconCart style={{color:"silver", fontSize:"20px"}}/></Nav.Link>}
-                                    <NavDropdown title={`Hi ${userData? userData.result.fullName : ''}`} id="basic-nav-dropdown">
+                                  {!user.isAdmin && <Nav.Link> <IconCart style={{color:"silver", fontSize:"20px"}}/></Nav.Link>}
+                                    <NavDropdown title={`Hi ${ user.fullName}`} id="basic-nav-dropdown">
                                         <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
                                         <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item>
                                 
