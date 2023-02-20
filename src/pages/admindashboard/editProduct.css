@@ -1,0 +1,26 @@
+.edit-product{
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+
+    padding-bottom: 50px;
+
+
+}
+
+
+
+.edit-btn{
+    background-color: #778b9c !important;
+    border: none !important;
+    outline: none !important;
+    margin-left: 5px;
+}
+
+.edit-btn:hover{
+    background-color: #697886 !important;
+}

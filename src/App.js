@@ -7,41 +7,19 @@ import { Container } from 'react-bootstrap';
 
 import {UserProvider} from './context/userContext'
 import Home from './pages/home';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+
 import Signup from './pages/signup';
 import PageNotFound from './pages/pageNotFound';
 import AdminDashBoard from './pages/admindashboard/adminDashBoard';
 import AddProducts from './pages/admindashboard/addProduct';
-
+import ViewAllProducts from './pages/admindashboard/viewProducts';
+import EditProduct from './pages/admindashboard/editProduct';
 function App() {
  
   const [user, setUser] = useState(null);
 
-  useEffect( ()=>{
- 
-    axios.get(`https://e-commerse-espiritu.onrender.com/user/details`,
-              {
-                  headers:{
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                  }
-              }
-          )
-
-        .then(response => {
-        
-            if(localStorage.getItem('token') === null){
-              setUser(response.data)
-            }
-            else{
-              setUser(null)
-            }
-            
-        })
-
-
-},[])
-
+  
   
   return (
    <>
@@ -58,6 +36,8 @@ function App() {
 
               <Route path='/adminDashBoard' element={<AdminDashBoard/>}>
                 <Route path='addProduct' element={<AddProducts/>}/>
+                <Route path='viewProducts' element={<ViewAllProducts/>}/>
+                <Route path='viewProducts/editProduct/:productId' element={<EditProduct/>}/>
               </Route>
 
           </Routes>

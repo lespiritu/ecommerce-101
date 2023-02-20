@@ -1,5 +1,6 @@
 
 import { useContext } from "react"
+import ProductCard from "../components/productCard/productCard"
 import UserContext from "../context/userContext"
 
 export default function Home(){
@@ -8,7 +9,7 @@ export default function Home(){
     return(
         <>
             <h1>Home</h1>
-            <h3>{userData ?  userData.message : 'not log in'}</h3>
+           <ProductCard/>
             
         </>
     )

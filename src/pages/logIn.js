@@ -11,6 +11,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import axios from "axios";
+
+
 export default function LogIn(){
     const navigate = useNavigate()
     const [email, setEmail] = useState('');
@@ -53,7 +55,7 @@ export default function LogIn(){
                 setPassword('');
                
                 if(response.data.result.isAdmin){
-                    navigate('/adminDashBoard')
+                    navigate('/adminDashBoard/viewProducts')
                 }
                 else{
                     navigate('/')
