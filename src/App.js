@@ -15,6 +15,7 @@ import AdminDashBoard from './pages/admindashboard/adminDashBoard';
 import AddProducts from './pages/admindashboard/addProduct';
 import ViewAllProducts from './pages/admindashboard/viewProducts';
 import EditProduct from './pages/admindashboard/editProduct';
+import ViewProduct from './components/viewProduct';
 function App() {
  
   const [user, setUser] = useState(null);
@@ -33,9 +34,11 @@ function App() {
               <Route path='signup' element={<Signup/>}/>
               <Route path='/' element={<Home/>}/>
               <Route path='*' element = {<PageNotFound/>} />
+              <Route path='/viewProduct/:productId' element={<ViewProduct/>}/>
 
               <Route path='/adminDashBoard' element={<AdminDashBoard/>}>
                 <Route path='addProduct' element={<AddProducts/>}/>
+                
                 <Route path='viewProducts' element={<ViewAllProducts/>}/>
                 <Route path='viewProducts/editProduct/:productId' element={<EditProduct/>}/>
               </Route>

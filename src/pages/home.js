@@ -1,16 +1,21 @@
 
-import { useContext } from "react"
-import ProductCard from "../components/productCard/productCard"
-import UserContext from "../context/userContext"
+
+
+
+import ProductList from "../components/productList";
+import ViewProduct from "../components/viewProduct";
 
 export default function Home(){
 
-    const {userData} = useContext(UserContext)
+
+
     return(
         <>
             <h1>Home</h1>
-           <ProductCard/>
-            
+            <ViewProduct/>
+            <ProductList/>
+
+
         </>
     )
 }

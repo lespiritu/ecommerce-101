@@ -102,7 +102,7 @@ export default function ViewAllProducts(){
             event.preventDefault();
             if(searchProductID !== ''){
                 
-                    axios.get(`http://localhost:4001/product/productId/${searchProductID}`,
+                    axios.get(`https://e-commerse-espiritu.onrender.com/product/productId/${searchProductID}`,
                     {
                         headers:{
                             Authorization: `Bearer ${localStorage.getItem('token')}`

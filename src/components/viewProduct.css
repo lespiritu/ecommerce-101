@@ -1,0 +1,35 @@
+.product-view{
+    margin-bottom:100px ;
+}
+
+
+.customer-rating{
+        padding: 15px;
+        margin-top: 30px;
+        border-radius: 5px;
+}
+
+.customer-rating:nth-child(even){
+    background-color: #f3f0e8;
+}
+.customer-rating:nth-child(odd){
+    background-color: #f5f4f1;
+}
+
+.btn-quantity{
+    width: 40px;
+    height: 40px;
+}
+
+.quantity-controler{
+    display: flex !important;
+
+}
+
+.star-Rating{
+    color: orange;
+    display: flex;
+    gap:10px;
+    margin: 10px 0;
+
+}

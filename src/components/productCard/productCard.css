@@ -1,0 +1,23 @@
+.product-card{
+    
+    transition: 0.3s ease;
+}
+
+.product-card:hover{
+   
+    transform: translateY(-10px) scale(1.02);
+    
+    cursor: pointer;
+
+    box-shadow: 0 15px 15px rgb(225, 225, 226);
+
+}
+
+.price{
+    font-weight: bold;
+    color: teal;
+}
+
+.product-name{
+    color: silver;
+}
