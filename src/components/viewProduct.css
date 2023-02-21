@@ -33,3 +33,7 @@
     margin: 10px 0;
 
 }
+
+.thumbnailImages{
+    cursor: pointer;
+}
