@@ -14,10 +14,18 @@
 }
 
 .price{
-    font-weight: bold;
-    color: teal;
+    font-weight:600;
+    color: orangered !important;
+
+
 }
 
 .product-name{
-    color: silver;
+    color: teal !important;
+
 }
+
+a:link{
+    text-decoration: none!important;
+ 
+  }

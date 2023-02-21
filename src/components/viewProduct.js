@@ -6,8 +6,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import UserContext from "../context/userContext";
+import { useContext } from "react";
 
 export default function ViewProduct(){
+    const {user} = useContext(UserContext)
     const navigate = useNavigate();
 
   const defaultImage = 'https://res.cloudinary.com/dbed2fwkj/image/upload/v1676939796/samples/ecommerse101-sample/default_jxvmvn.png'
@@ -22,13 +27,16 @@ export default function ViewProduct(){
   const [ratings, setRatings] = useState([])
 
   const [primaryImage, setPrimaryImage] = useState(defaultImage);
+
+  // local inputs
+  const [quantity, setQuantity] = useState(1);
   
 
     useEffect(()=>{
         axios.get(`https://e-commerse-espiritu.onrender.com/product/productIdActive/${productId}`)
 
         .then(response => {
-            console.log(response.data);
+            // console.log(response.data);
             if(response.data.status === 'success'){
                 setProductName(response.data.result.productName)
                 setCategory(response.data.result.category)
@@ -46,11 +54,95 @@ export default function ViewProduct(){
 
     },[productId, navigate])
 
-
+// This code is for changing the image
     function changePrimaryImage(image){
         setPrimaryImage(image)
     }
 
+// This code is to order process
+function createOrder(){
+
+    if(localStorage.getItem('token')){
+        if(quantity <= 0){
+            toast.error(`Error! Please input valid quantity`, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+        }
+        else{
+            axios.post(`https://e-commerse-espiritu.onrender.com/order/createOrderProduct/${productId}`,
+            {
+                userId: user._id,
+                userEmail: user.email,
+    
+                productId: productId,
+                productName: productName,
+                productDescription: productDescription,
+                price: price,
+                quantity: quantity,
+                totalAmount: quantity * price,
+                image:primaryImage
+            },
+        
+            {
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            }
+            )
+            .then(response=>{
+                // console.log(response);
+                if(response.data.status === "failed"){
+                    toast.error(`Error! ${response.data.message}`, {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
+                }
+                else if(response.data.status === "success"){
+                    toast.success(`Order has been created! Thank you for your order!`, {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
+
+                        setQuantity(1)
+                }
+            })
+        }
+    }
+    else{
+        toast.error(`Log in first to create an order!`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+    }
+
+
+    }
+    
  
     return(
         <Container className="product-view">
@@ -99,8 +191,8 @@ export default function ViewProduct(){
                                         <Form.Control 
                                             type="number" 
                                             min={1}
-                                            // value={email}
-                                            // onChange={(event)=>setEmail(event.target.value)}
+                                            value={quantity}
+                                            onChange={(event)=>setQuantity(event.target.value)}
                                             />
                                     
                                     </Form.Group>
@@ -112,7 +204,7 @@ export default function ViewProduct(){
             
 
                         <Button className="me-2" variant="dark" >Add to Cart</Button>
-                        <Button className="me-2" variant="dark" >Buy Now</Button>
+                        <Button onClick={createOrder} className="me-2" variant="dark" >Buy Now</Button>
                         </Form>
                         
                     </Row>
@@ -147,7 +239,7 @@ export default function ViewProduct(){
         }
             
             
-     
+        <ToastContainer/>
         </Container>
     )
 }

@@ -57,7 +57,7 @@ export default function NavBar(){
     return(
         <>
             
-            <Navbar bg="dark" variant='dark' >
+            <Navbar bg="dark" variant='dark' sticky="top" >
                     <Container>
                          <Navbar.Brand  as = {NavLink} to="/">
                             Brand Name
@@ -67,6 +67,7 @@ export default function NavBar(){
 
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ms-auto ">
+                                <Nav.Link as = {NavLink} to="/">Home</Nav.Link>
                                 {!user && 
                                     <>
                                     <Nav.Link as = {NavLink} to="login">Login</Nav.Link>
@@ -81,7 +82,7 @@ export default function NavBar(){
                                         {user.isAdmin && <NavDropdown.Item as ={Link} to ="/adminDashBoard/viewProducts">Dashboard</NavDropdown.Item>}
                                         
                                         {!user.isAdmin && <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>}
-                                        {!user.isAdmin && <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item>}
+                                        {!user.isAdmin && <NavDropdown.Item as={Link} to ="/ViewOrdersList">Orders</NavDropdown.Item>}
                                 
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item onClick={event=> logOut(event)} as = {Link} to="/">LogOut</NavDropdown.Item>

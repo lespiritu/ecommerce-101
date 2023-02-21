@@ -14,7 +14,7 @@ export default function ProductCard(prop){
                 
                     <ListGroup className="list-group-flush">
                         <ListGroup.Item className='product-name'>{prop.productName}</ListGroup.Item>
-                        <ListGroup.Item className='price'>Price:{prop.price} </ListGroup.Item>
+                        <ListGroup.Item className='price'>Price: ₱{prop.price} </ListGroup.Item>
                         
                    
                     </ListGroup>
