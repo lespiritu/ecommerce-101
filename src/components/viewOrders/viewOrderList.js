@@ -13,9 +13,12 @@ import OrderCard from './orderCard'
 
 export default function ViewOrdersList(){
     const [orders, setOrders] = useState([]);
+    const [completedOrders, setCompletedOrders] = useState([]);
 
     const [orderUpdated, setOrderUpdated] = useState(false)
 
+
+    // code for get all active orders ----------------------------
     useEffect(()=>{
         axios.get(`https://e-commerse-espiritu.onrender.com/order/onGoingOrders`,
             {
@@ -29,10 +32,30 @@ export default function ViewOrdersList(){
             setOrders(response.data.data)
         })
     },[orderUpdated])
+ // code for get all active orders end --------------------------
 
 
 
-     // function for recieving order
+    // code for get all completed orders ----------------------------------------------
+    useEffect(()=>{
+        axios.get('https://e-commerse-espiritu.onrender.com/order/showCompletedOrders',
+            {
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }  
+            }
+        )
+        .then(response =>{
+            // console.log(response);
+            setCompletedOrders(response.data.data)
+        })
+    },[])
+    // code for get all completed orders end ---------------------------------------------
+
+
+
+
+     // function for recieving order ----------------------------------
      function recivedOrder(id){
         fetch(`https://e-commerse-espiritu.onrender.com/order/recievedOrder/${id}`,
             {
@@ -77,10 +100,35 @@ export default function ViewOrdersList(){
             }
         )
     }
+// function for recieving order end ----------------------------------
+
+
+// function to rate products and order -------------------------------
+
+// TO BE CONTINUE HERE
+    // function rateProductOrder(id){
+    //     fetch(`https://e-commerse-espiritu.onrender.com/order/orderComplete/addProductRating/${id}`,
+    //     {
+    //         method:"PUT",
+    //         headers:{
+    //             'Content-Type' : 'application/json',
+    //             Authorization: `Bearer ${localStorage.getItem('token')}`
+    //         },
+    //         body:JSON.stringify(
+    //             {
+    //                 rating:3,
+    //                 feedBack:''
+    //             }
+    //         )
+           
+    //     }
+    //     )
+    // }
+
     
 
     const allOrders = orders.map( (item, index) => <OrderCard key={index} {...item} recivedOrder={recivedOrder}/>)
-   
+    const allCompletedOrders = completedOrders.map( (item, index)=> <OrderCard key={index} {...item}/>)
     
     return(
         <div style={{marginTop:"50px", marginBottom:"100px"}}>
@@ -90,12 +138,15 @@ export default function ViewOrdersList(){
                 <Tab eventKey="activeOrders" title="Active Orders">
                     <div style={{ marginBottom:"100px"}}>
                         <h2 className="text-secondary" style={{padding:"0 10px"}}>Active Orders</h2>
-                    {allOrders}
+                        {allOrders}
                     
                     </div>
                 </Tab>
                 <Tab eventKey="completedOrders" title="Completed Orders">
-        
+                    <div style={{ marginBottom:"100px"}}>
+                        <h2 className="text-secondary" style={{padding:"0 10px"}}>Completed Orders</h2> 
+                         {allCompletedOrders}
+                    </div>
                 </Tab>
             </Tabs>
             
