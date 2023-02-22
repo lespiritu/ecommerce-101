@@ -5,7 +5,7 @@ import './editProduct.css'
 import { useState,useEffect} from 'react';
 import { useParams} from 'react-router-dom'
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import axios from 'axios';
 
@@ -96,7 +96,7 @@ export default function EditProduct(){
            if(response.status === 'success'){
             toast.success(`${response.message}`, {
                 position: "top-center",
-                autoClose: 3000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -111,7 +111,7 @@ export default function EditProduct(){
            else{
             toast.error(`${response.message}`, {
                 position: "top-center",
-                autoClose: 3000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -261,7 +261,7 @@ const enableHandler = ()=>{
 
                 <Button onClick={enableHandler} style={{marginLeft:'5px'}} className="edit-btn" variant='success'>Edit Product</Button>   
             </Form>
-            <ToastContainer/>
+    
             </div>
         </>
     )
