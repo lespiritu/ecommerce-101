@@ -26,7 +26,7 @@ export default function ViewOrdersList(){
  
     // code for get all active orders ----------------------------
     useEffect(()=>{
-        axios.get(`https://e-commerse-espiritu.onrender.com/order/onGoingOrders`,
+        axios.get(`${process.env.REACT_APP_API_URL}/order/onGoingOrders`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -44,7 +44,7 @@ export default function ViewOrdersList(){
 
     // code for get all completed orders ----------------------------------------------
     useEffect(()=>{
-        axios.get('https://e-commerse-espiritu.onrender.com/order/showCompletedOrders',
+        axios.get(`${process.env.REACT_APP_API_URL}/order/showCompletedOrders`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -63,7 +63,7 @@ export default function ViewOrdersList(){
 
      // function for recieving order ----------------------------------
      function recivedOrder(id){
-        fetch(`https://e-commerse-espiritu.onrender.com/order/recievedOrder/${id}`,
+        fetch(`${process.env.REACT_APP_API_URL}/order/recievedOrder/${id}`,
             {
                 method:"PUT",
                 headers:{
@@ -78,6 +78,8 @@ export default function ViewOrdersList(){
             // console.log(response);
 
             if(response.status === "success"){
+
+                setOrderUpdated(previous=> !previous)
                 toast.success(`Order Completed! Thank you!`, {
                     position: "top-center",
                     autoClose: 3000,
@@ -89,7 +91,7 @@ export default function ViewOrdersList(){
                     theme: "colored",
                     });
 
-                    setOrderUpdated(previous=> !previous)
+                    
             }
             else{
                 toast.error(`Error ${response.message}!`, {
@@ -133,7 +135,7 @@ export default function ViewOrdersList(){
 
                
         
-        fetch(`https://e-commerse-espiritu.onrender.com/order/orderComplete/addProductRating/${getId}`,
+        fetch(`${process.env.REACT_APP_API_URL}/order/orderComplete/addProductRating/${getId}`,
         {
             method:"PUT",
             headers:{
