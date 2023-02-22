@@ -1,7 +1,11 @@
+import Form from 'react-bootstrap/Form';
+
+
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -17,7 +21,9 @@ export default function ViewOrdersList(){
 
     const [orderUpdated, setOrderUpdated] = useState(false)
 
-
+    
+    const [ratedDone, setRatedDone] = useState(false)
+ 
     // code for get all active orders ----------------------------
     useEffect(()=>{
         axios.get(`https://e-commerse-espiritu.onrender.com/order/onGoingOrders`,
@@ -49,7 +55,7 @@ export default function ViewOrdersList(){
             // console.log(response);
             setCompletedOrders(response.data.data)
         })
-    },[])
+    },[ratedDone, orderUpdated])
     // code for get all completed orders end ---------------------------------------------
 
 
@@ -106,40 +112,106 @@ export default function ViewOrdersList(){
 // function to rate products and order -------------------------------
 
 // TO BE CONTINUE HERE
-    // function rateProductOrder(id){
-    //     fetch(`https://e-commerse-espiritu.onrender.com/order/orderComplete/addProductRating/${id}`,
-    //     {
-    //         method:"PUT",
-    //         headers:{
-    //             'Content-Type' : 'application/json',
-    //             Authorization: `Bearer ${localStorage.getItem('token')}`
-    //         },
-    //         body:JSON.stringify(
-    //             {
-    //                 rating:3,
-    //                 feedBack:''
-    //             }
-    //         )
+
+     // for modal handler
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setShow(false);
+        setRating(5);
+        setFeedback('');
+    };
+    const handleShow = () => setShow(true);
+
+    const [getId, setGetId] = useState('');
+    const [rating, setRating] = useState(5);
+    const [feeback, setFeedback] = useState('')
+  
+
+    function toRateHandler(event){
+        event.preventDefault();
+        handleClose()
+
+               
+        
+        fetch(`https://e-commerse-espiritu.onrender.com/order/orderComplete/addProductRating/${getId}`,
+        {
+            method:"PUT",
+            headers:{
+                'Content-Type' : 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            body:JSON.stringify(
+                {
+                    rating:rating,
+                    feedBack:feeback
+                }
+            )
            
-    //     }
-    //     )
-    // }
+        }
+        )
+        .then(data=> data.json())
+        .then(response =>{
+            if(response.status === "success"){
+                setRatedDone(previous=>!previous)
 
+                toast.success(`Error ${response.message}!`, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
+            }
+            if(response.status === "failed"){
+      
+                toast.error(`Error ${response.message}!`, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
+                    
+            }
+        })
+    }
+
+    // this code is for just get the id of product from order card component
+    function rateProductOrder(id){
+        handleShow()
+        setGetId(id)
+
+
+    }
+
+
+    const allOrders = orders.map( (item, index) => <OrderCard key={index} {...item} recivedOrder={recivedOrder} />)
+
+    // const newob = [{name:'first', age:30}, {name:'2nd', age:3}, {name:'third', age:28}]
+    // const new111 = newob.sort((a,b) => (b.age - a.age))
+    // console.log(new111);
+
+    // const sortedAllCompleteOrders = completedOrders.sort((a,b) => (new Date(b.OrderDate).getTime() - new Date(a.OrderDate).getTime()))
+    // console.log(sortedAllCompleteOrders);
     
-
-    const allOrders = orders.map( (item, index) => <OrderCard key={index} {...item} recivedOrder={recivedOrder}/>)
-    const allCompletedOrders = completedOrders.map( (item, index)=> <OrderCard key={index} {...item}/>)
+    const allCompletedOrders = completedOrders.map( (item, index)=> <OrderCard key={index} {...item} rateProductOrder = {rateProductOrder} />)
     
     return(
         <div style={{marginTop:"50px", marginBottom:"100px"}}>
             
-            <Tabs defaultActiveKey="activeOrders"  transition={false}  id="noanim-tab-example"   className="mb-3">
+            <Tabs  transition={false}  id="noanim-tab-example"   className="mb-3">
 
                 <Tab eventKey="activeOrders" title="Active Orders">
                     <div style={{ marginBottom:"100px"}}>
                         <h2 className="text-secondary" style={{padding:"0 10px"}}>Active Orders</h2>
                         {allOrders}
-                    
+                       
                     </div>
                 </Tab>
                 <Tab eventKey="completedOrders" title="Completed Orders">
@@ -147,10 +219,61 @@ export default function ViewOrdersList(){
                         <h2 className="text-secondary" style={{padding:"0 10px"}}>Completed Orders</h2> 
                          {allCompletedOrders}
                     </div>
+
+                
+
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        <Modal.Header closeButton>
+                        <Modal.Title>Add Rating and Feedback</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form onSubmit={(event)=> toRateHandler(event)} className="col-12"  variant="dark">
+                                <Form.Group className="mb-3" controlId="formBasicPrice">
+                                    <Form.Label>Rating</Form.Label>
+                                        <Form.Control 
+                                            max={5}
+                                            min={1}
+                                            type="number" 
+                                            placeholder="Rate from 1 to 5" 
+                                            required
+                                            value={rating}
+                                            onChange={event=> setRating(event.target.value)}
+
+                                            />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="formBasicDescription">
+                                <Form.Label>Comment</Form.Label>
+                                <Form.Control  as="textarea" 
+                                    rows={4}
+                                    placeholder="Comment your feedback here" 
+                                    required
+                                    value={feeback}
+                                    onChange={event=> setFeedback(event.target.value)}
+
+                                    />
+                                </Form.Group>
+                                <Button type='submit' variant="secondary">Submit Rating</Button>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                       
+                        
+                        </Modal.Footer>
+                    </Modal>
+
+                    
                 </Tab>
             </Tabs>
-            
+
+
             <ToastContainer/>
+           
         </div>
     )
 }

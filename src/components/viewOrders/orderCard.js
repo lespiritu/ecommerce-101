@@ -19,7 +19,7 @@ export default function OrderCard(prop){
 
             
             {prop.orderStatus !== "recieved" &&  <Button onClick={()=>prop.recivedOrder(prop._id)} variant='danger'>Recieve Order</Button>}
-            {!prop.isRated && prop.orderStatus ==="recieved" &&  <Button  variant='danger'>Add Rating</Button>}
+            {!prop.isRated && prop.orderStatus ==="recieved" &&  <Button onClick={()=> prop.rateProductOrder(prop._id)}  variant='danger'>Add Rating</Button>}
             </div>
               
         </div>
