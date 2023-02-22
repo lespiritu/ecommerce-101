@@ -7,7 +7,7 @@ import {Button} from 'react-bootstrap'
 
 import Form from 'react-bootstrap/Form';
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { Link } from "react-router-dom";
 
@@ -74,7 +74,7 @@ export default function ViewAllProducts(){
             setUpdatedArchive(previous=> !previous)
             toast.success(`Successfully changed isActive property into:! ${data.isActive}`, {
                 position: "top-center",
-                autoClose: 3000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -124,7 +124,7 @@ export default function ViewAllProducts(){
                         else{
                             toast.error(`Invalid Product ID!`, {
                                 position: "top-center",
-                                autoClose: 3000,
+                                autoClose: 1000,
                                 hideProgressBar: false,
                                 closeOnClick: true,
                                 pauseOnHover: true,
@@ -138,7 +138,7 @@ export default function ViewAllProducts(){
             else{
                 toast.error(`Please input Product ID!`, {
                     position: "top-center",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -204,7 +204,7 @@ export default function ViewAllProducts(){
                      
                     </tbody>
                 </table>
-                        <ToastContainer/>
+                        
             </div>
         </>
     )

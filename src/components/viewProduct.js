@@ -6,7 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import UserContext from "../context/userContext";
 import { useContext } from "react";
@@ -66,7 +66,7 @@ function createOrder(){
         if(quantity <= 0){
             toast.error(`Error! Please input valid quantity`, {
                 position: "top-center",
-                autoClose: 3000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -101,7 +101,7 @@ function createOrder(){
                 if(response.data.status === "failed"){
                     toast.error(`Error! ${response.data.message}`, {
                         position: "top-center",
-                        autoClose: 3000,
+                        autoClose: 1000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -113,7 +113,7 @@ function createOrder(){
                 else if(response.data.status === "success"){
                     toast.success(`Order has been created! Thank you for your order!`, {
                         position: "top-center",
-                        autoClose: 3000,
+                        autoClose: 1000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -130,7 +130,7 @@ function createOrder(){
     else{
         toast.error(`Log in first to create an order!`, {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -142,6 +142,89 @@ function createOrder(){
 
 
     }
+
+
+
+    /// ============== Add to Cart function ===============================
+            function addToCartHandler(){
+                if(localStorage.getItem('token')){
+                    if(quantity <= 0){
+                        toast.error(`Error! Please input valid quantity`, {
+                            position: "top-center",
+                            autoClose: 1000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            });
+                    }
+                   
+                    else{
+                        axios.post(`${process.env.REACT_APP_API_URL}/cart/addToCart/${productId}`,
+                        {
+                            userId: user._id,
+                            userEmail: user.email,
+    
+                            productId: productId,
+                            productName: productName,
+                            productDescription: productDescription,
+                            price: price,
+                            quantity: quantity,
+                            totalAmount: quantity * price,
+                            image:primaryImage
+                        },
+                        {
+                            headers:{
+                                Authorization: `Bearer ${localStorage.getItem('token')}`
+                            }
+                        })
+                        .then(response=>{
+                            // console.log(response);
+                            if(response.data.status === "failed"){
+                                toast.error(`Error! ${response.data.message}`, {
+                                    position: "top-center",
+                                    autoClose: 1000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "colored",
+                                    });
+                            }
+                            else if(response.data.status === "success"){
+                                toast.success(`${response.data.message}`, {
+                                    position: "top-center",
+                                    autoClose: 1000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "colored",
+                                    });
+            
+                                    setQuantity(1)
+                            }
+                        })
+                    }
+                }
+                else{
+                    toast.error(`Log in first to add product to cart!`, {
+                        position: "top-center",
+                        autoClose: 1000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
+                }
+            }
+    /// ============== Add to Cart function End ===============================
     
  
     return(
@@ -203,7 +286,7 @@ function createOrder(){
 
             
 
-                        <Button className="me-2" variant="dark" >Add to Cart</Button>
+                        <Button className="me-2" variant="dark" onClick={addToCartHandler} >Add to Cart</Button>
                         <Button onClick={createOrder} className="me-2" variant="dark" >Buy Now</Button>
                         </Form>
                         
@@ -239,7 +322,7 @@ function createOrder(){
         }
             
             
-        <ToastContainer/>
+
         </Container>
     )
 }

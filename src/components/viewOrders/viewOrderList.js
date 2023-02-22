@@ -7,7 +7,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 import axios from "axios"
@@ -82,7 +82,7 @@ export default function ViewOrdersList(){
                 setOrderUpdated(previous=> !previous)
                 toast.success(`Order Completed! Thank you!`, {
                     position: "top-center",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -96,7 +96,7 @@ export default function ViewOrdersList(){
             else{
                 toast.error(`Error ${response.message}!`, {
                     position: "top-center",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -158,7 +158,7 @@ export default function ViewOrdersList(){
 
                 toast.success(`Error ${response.message}!`, {
                     position: "top-center",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -171,7 +171,7 @@ export default function ViewOrdersList(){
       
                 toast.error(`Error ${response.message}!`, {
                     position: "top-center",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -274,7 +274,6 @@ export default function ViewOrdersList(){
             </Tabs>
 
 
-            <ToastContainer/>
            
         </div>
     )

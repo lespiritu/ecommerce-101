@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { useState,useEffect} from 'react';
 import axios from 'axios';
 import './addProduct.css'
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function AddProducts(){
@@ -60,7 +60,7 @@ export default function AddProducts(){
             if(response.data.status ==="success"){
                 toast.success(`${response.data.message}`, {
                     position: "top-center",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -84,7 +84,7 @@ export default function AddProducts(){
             else{
                 toast.error(`${response.data.message}`, {
                     position: "top-center",
-                    autoClose: 3000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -217,7 +217,7 @@ export default function AddProducts(){
                 </Button>
             </Form>
             
-          <ToastContainer/>
+
         </div>
         </>
     )

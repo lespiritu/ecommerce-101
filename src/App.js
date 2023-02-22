@@ -1,3 +1,6 @@
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 
 import './App.css';
 import NavBar from './components/navbar';
@@ -21,6 +24,7 @@ import ViewOrdersList from './components/viewOrders/viewOrderList';
 
 import OrderAdminList from './pages/admindashboard/orderAdminList';
 import Footer from './pages/footer';
+import CartView from './components/cartView/cartView';
 function App() {
  
   const [user, setUser] = useState(null);
@@ -41,14 +45,12 @@ function App() {
               <Route path='*' element = {<PageNotFound/>} />
               <Route path='/viewProduct/:productId' element={<ViewProduct/>}/>
               <Route path='/viewOrdersList' element={<ViewOrdersList/>}/>
+              <Route path='/cartView' element={<CartView/>}/>
 
               <Route path='/adminDashBoard' element={<AdminDashBoard/>}>
                 <Route path='addProduct' element={<AddProducts/>}/>
-                
                 <Route path='viewProducts' element={<ViewAllProducts/>}/>
                 <Route path='viewProducts/editProduct/:productId' element={<EditProduct/>}/>
-
-
                 <Route path='ordersAdminList' element={<OrderAdminList/>}/>
               </Route>
 
@@ -56,6 +58,8 @@ function App() {
           </Container>
           <Footer/>
         </UserProvider>
+
+        <ToastContainer/>
    </>
   );
 }

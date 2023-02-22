@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import OrdersAdminCard from "./ordersAdminCard";
 
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function OrderAdminList(){
@@ -207,7 +207,7 @@ function searchOrderId(event){
                  </Form>
          {renderAllOrders}
 
-         <ToastContainer/>
+
         </div>
     )
 }

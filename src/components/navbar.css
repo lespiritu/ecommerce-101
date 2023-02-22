@@ -1,0 +1,10 @@
+.icon-cart{
+    color: #98d1db;
+    font-size: 25;
+    transition: 0.3s ease;
+}
+
+.icon-cart:hover{
+    color: #7ab5c0;
+}
+

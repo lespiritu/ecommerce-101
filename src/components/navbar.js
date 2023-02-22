@@ -1,4 +1,4 @@
-
+import './navbar.css'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -77,12 +77,12 @@ export default function NavBar(){
                                 
                               {user && 
                                 <Nav>
-                                  {!user.isAdmin && <Nav.Link> <IconCart style={{color:"silver", fontSize:"20px"}}/></Nav.Link>}
+                                  {!user.isAdmin && <Nav.Link as ={Link} to ='/cartView'> <IconCart className='icon-cart'/></Nav.Link>}
                                     <NavDropdown title={`Hi ${ user.fullName}`} id="basic-nav-dropdown">
                                         {user.isAdmin && <NavDropdown.Item as ={Link} to ="/adminDashBoard/viewProducts">Dashboard</NavDropdown.Item>}
                                         
-                                        {!user.isAdmin && <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>}
-                                        {!user.isAdmin && <NavDropdown.Item as={Link} to ="/ViewOrdersList">Orders</NavDropdown.Item>}
+                                        {!user.isAdmin && <NavDropdown.Item as={Link} to = "/cartView">View Cart</NavDropdown.Item>}
+                                        {!user.isAdmin && <NavDropdown.Item as={Link} to = "/ViewOrdersList">Orders</NavDropdown.Item>}
                                 
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item onClick={event=> logOut(event)} as = {Link} to="/">LogOut</NavDropdown.Item>
