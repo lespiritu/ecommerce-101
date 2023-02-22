@@ -17,7 +17,8 @@ export default function ViewAllProducts(){
     
     const [products, setProducts] =useState([]);
     const [searchProductID, setSearchProductId] = useState('');
-   
+    
+    const [updatedArchive, setUpdatedArchive] = useState(false);
 
     function viewAll(event){
         event.preventDefault()
@@ -48,13 +49,16 @@ export default function ViewAllProducts(){
            
             setProducts(response.data)
         })
-    },[])
+    },[updatedArchive])
 
 
 
 
 
    async function archive(event, productId){
+
+    
+
         event.preventDefault();
         event.stopPropagation();
        await fetch(`https://e-commerse-espiritu.onrender.com/product/deactivatedProduct/${productId}`, 
@@ -67,7 +71,8 @@ export default function ViewAllProducts(){
         })
         .then(result=> result.json())
         .then(data=> {
-            toast.success(`Successfully changed isAdmin property into:! ${data.isActive}`, {
+            setUpdatedArchive(previous=> !previous)
+            toast.success(`Successfully changed isActive property into:! ${data.isActive}`, {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -77,6 +82,7 @@ export default function ViewAllProducts(){
                 progress: undefined,
                 theme: "colored",
                 });
+
         })
     }
 
@@ -189,7 +195,7 @@ export default function ViewAllProducts(){
 
                                     <td>
                                     
-                                    <Button onClick={event=> archive(event, item._id)} className="archive">Archive</Button>
+                                    <Button onClick={event=> archive(event, item._id)} className={item.isActive ?"archive":"activate"}>{item.isActive ? "Archive" : "Activate"}</Button>
                                     <Button as ={Link} to={`editProduct/${item._id}`} className="edit-btn">Edit</Button>
                                     </td>
                                   </tr>

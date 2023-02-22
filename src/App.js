@@ -17,6 +17,10 @@ import ViewAllProducts from './pages/admindashboard/viewProducts';
 import EditProduct from './pages/admindashboard/editProduct';
 import ViewProduct from './components/viewProduct';
 import ViewOrdersList from './components/viewOrders/viewOrderList';
+
+
+import OrderAdminList from './pages/admindashboard/orderAdminList';
+import Footer from './pages/footer';
 function App() {
  
   const [user, setUser] = useState(null);
@@ -27,7 +31,7 @@ function App() {
    <>
       <UserProvider value={{user, setUser}}>
         <NavBar/>
-        <Container>
+        <Container className='parent-caontainer'>
           <Routes>
               
               <Route path='login' element={<LogIn/>}/>
@@ -43,10 +47,14 @@ function App() {
                 
                 <Route path='viewProducts' element={<ViewAllProducts/>}/>
                 <Route path='viewProducts/editProduct/:productId' element={<EditProduct/>}/>
+
+
+                <Route path='ordersAdminList' element={<OrderAdminList/>}/>
               </Route>
 
           </Routes>
           </Container>
+          <Footer/>
         </UserProvider>
    </>
   );

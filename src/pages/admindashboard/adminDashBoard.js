@@ -22,6 +22,12 @@ export default function AdminDashBoard(){
                         <NavDropdown.Item as ={Link} to ="viewProducts">View Products</NavDropdown.Item>
                      
                     </NavDropdown>
+
+                    <NavDropdown title={`Orders`} id="basic-nav-dropdown">
+                        <NavDropdown.Item as ={Link} to ="ordersAdminList">View all Orders</NavDropdown.Item>
+                     
+                     
+                    </NavDropdown>
                 </Nav>
                 </Container>
             </Navbar>
