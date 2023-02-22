@@ -25,7 +25,7 @@ export default function LogIn(){
     function logIn(event){
 
        
-       axios.post('https://e-commerse-espiritu.onrender.com/user/login',{
+       axios.post(`${process.env.REACT_APP_API_URL}/user/login`,{
         email:email,
         password:password
        })
@@ -70,7 +70,7 @@ export default function LogIn(){
         // setUser(localStorage.getItem("email"))
         
         const retrieveUsreDetails = (token)=>{
-            axios.get(`https://e-commerse-espiritu.onrender.com/user/details`,
+            axios.get(`${process.env.REACT_APP_API_URL}/user/details`,
                 {
                     headers:{
                         Authorization: `Bearer ${token}`

@@ -41,7 +41,7 @@ export default function EditProduct(){
         
     useEffect( ()=>{
   
-        axios.get(`https://e-commerse-espiritu.onrender.com/product/productId/${productId}`,
+        axios.get(`${process.env.REACT_APP_API_URL}/product/productId/${productId}`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -69,7 +69,7 @@ export default function EditProduct(){
     function editProduct(event, id){
         event.preventDefault();
 
-        fetch(`https://e-commerse-espiritu.onrender.com/product/update/${id}`, 
+        fetch(`${process.env.REACT_APP_API_URL}/product/update/${id}`, 
             {
                 method:"PUT",
                 headers:{

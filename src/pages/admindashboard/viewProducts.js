@@ -22,7 +22,7 @@ export default function ViewAllProducts(){
 
     function viewAll(event){
         event.preventDefault()
-            axios.get('https://e-commerse-espiritu.onrender.com/product/allProducts',
+            axios.get(`${process.env.REACT_APP_API_URL}/product/allProducts`,
                 {
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -38,7 +38,7 @@ export default function ViewAllProducts(){
 
   
     useEffect(()=>{
-        axios.get('https://e-commerse-espiritu.onrender.com/product/allProducts',
+        axios.get(`${process.env.REACT_APP_API_URL}/product/allProducts`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -61,7 +61,7 @@ export default function ViewAllProducts(){
 
         event.preventDefault();
         event.stopPropagation();
-       await fetch(`https://e-commerse-espiritu.onrender.com/product/deactivatedProduct/${productId}`, 
+       await fetch(`${process.env.REACT_APP_API_URL}/product/deactivatedProduct/${productId}`, 
         {
             method:'PUT',
             headers:{
@@ -90,7 +90,7 @@ export default function ViewAllProducts(){
     function getNotActive(event){
             event.preventDefault();
 
-        axios.get(`https://e-commerse-espiritu.onrender.com/product/inActiveProducts`,
+        axios.get(`${process.env.REACT_APP_API_URL}/product/inActiveProducts`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -108,7 +108,7 @@ export default function ViewAllProducts(){
             event.preventDefault();
             if(searchProductID !== ''){
                 
-                    axios.get(`https://e-commerse-espiritu.onrender.com/product/productId/${searchProductID}`,
+                    axios.get(`${process.env.REACT_APP_API_URL}/product/productId/${searchProductID}`,
                     {
                         headers:{
                             Authorization: `Bearer ${localStorage.getItem('token')}`

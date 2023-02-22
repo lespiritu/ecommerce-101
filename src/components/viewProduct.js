@@ -33,7 +33,7 @@ export default function ViewProduct(){
   
 
     useEffect(()=>{
-        axios.get(`https://e-commerse-espiritu.onrender.com/product/productIdActive/${productId}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/product/productIdActive/${productId}`)
 
         .then(response => {
             // console.log(response.data);
@@ -76,7 +76,7 @@ function createOrder(){
                 });
         }
         else{
-            axios.post(`https://e-commerse-espiritu.onrender.com/order/createOrderProduct/${productId}`,
+            axios.post(`${process.env.REACT_APP_API_URL}/order/createOrderProduct/${productId}`,
             {
                 userId: user._id,
                 userEmail: user.email,

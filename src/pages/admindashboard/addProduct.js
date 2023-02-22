@@ -36,7 +36,7 @@ export default function AddProducts(){
     function addProduct(event){
         event.preventDefault();
 
-        axios.post('https://e-commerse-espiritu.onrender.com/product/addProduct',
+        axios.post(`${process.env.REACT_APP_API_URL}/product/addProduct`,
             {
                 productName:productName,
                 productDescription:productDescription,

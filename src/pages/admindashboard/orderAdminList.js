@@ -17,7 +17,7 @@ export default function OrderAdminList(){
     const [orderId, setOrderId] = useState('');
 
     useEffect(()=>{
-        axios.get('https://e-commerse-espiritu.onrender.com/order/showOrdersAdmin/all',
+        axios.get(`${process.env.REACT_APP_API_URL}/order/showOrdersAdmin/all`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -37,7 +37,7 @@ export default function OrderAdminList(){
 
     //
     function allOrdersHandler(){
-            axios.get('https://e-commerse-espiritu.onrender.com/order/showOrdersAdmin/all',
+            axios.get(`${process.env.REACT_APP_API_URL}/order/showOrdersAdmin/all`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -67,7 +67,7 @@ export default function OrderAdminList(){
 
 ///-------------- All on going orders ------------------
         function allOnGoingOrdersHandler(){
-            axios.get('https://e-commerse-espiritu.onrender.com/order/showOrdersAdmin/onGoing',
+            axios.get(`${process.env.REACT_APP_API_URL}/order/showOrdersAdmin/onGoing`,
                 {
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -98,7 +98,7 @@ export default function OrderAdminList(){
 
 ///// ------------ All complete orders -------------------
         function allCompleteOrdersHandler(){
-            axios.get('https://e-commerse-espiritu.onrender.com/order/showOrdersAdmin/completed',
+            axios.get(`${process.env.REACT_APP_API_URL}/order/showOrdersAdmin/completed`,
                 {
                     headers:{
                         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -135,7 +135,7 @@ function searchOrderId(event){
     event.preventDefault();
     if(orderId !== ''){
         
-            axios.get(`https://e-commerse-espiritu.onrender.com/order/showOrdersAdmin/singleOrder/${orderId}`,
+            axios.get(`${process.env.REACT_APP_API_URL}/order/showOrdersAdmin/singleOrder/${orderId}`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`

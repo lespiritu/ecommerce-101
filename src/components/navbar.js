@@ -29,7 +29,7 @@ export default function NavBar(){
 
     useEffect( ()=>{
  
-        axios.get(`https://e-commerse-espiritu.onrender.com/user/details`,
+        axios.get(`${process.env.REACT_APP_API_URL}/user/details`,
                   {
                       headers:{
                         Authorization: `Bearer ${localStorage.getItem('token')}`

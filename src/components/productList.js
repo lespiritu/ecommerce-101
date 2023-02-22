@@ -15,7 +15,7 @@ export default function ProductList(){
     const [productList, setProductList] = useState([]);
 
     useEffect(()=>{
-        axios.get('https://e-commerse-espiritu.onrender.com/product/allActiveProducts')
+        axios.get(`${process.env.REACT_APP_API_URL}/product/allActiveProducts`)
         .then(response =>{
     
             setProductList(response.data)

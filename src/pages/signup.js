@@ -61,7 +61,7 @@ export default function Signup(){
     function signup(event){
         event.preventDefault();
 
-        axios.post('https://e-commerse-espiritu.onrender.com/user/register',
+        axios.post(`${process.env.REACT_APP_API_URL}/user/register`,
             {
                 email: email,
                 password: password,
