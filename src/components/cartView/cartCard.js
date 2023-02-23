@@ -16,6 +16,7 @@ export default function CartCard(props){
 
     return(
         <div className='card-cart-container'>
+        
                 <div className='cart-details'>
                     <div><img height={130} src={image ?? defaultImage}alt={productName}/></div>
                     <div className='body-cart'>
@@ -25,6 +26,7 @@ export default function CartCard(props){
                         <div >
                             <Form onClick={(event)=>createOrder(event,quantityLocal, props)}  className='bottom-control'>
                             <Form.Control className='controler quantity ' 
+                            
                                 type="number"
                                 value={quantityLocal}
                                 required

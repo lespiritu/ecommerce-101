@@ -56,86 +56,87 @@ export default function CartView(){
 // This code is to order process
 function createOrder(event, quantityLocal,props){
     event.preventDefault();
+   
 
-    if(localStorage.getItem('token')){
+    // if(localStorage.getItem('token')){
 
-        if(quantityLocal <= 0){
-            toast.error(`Error! Please input valid quantity`, {
-                position: "top-center",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
-        } 
+    //     if(quantityLocal <= 0){
+    //         toast.error(`Error! Please input valid quantity`, {
+    //             position: "top-center",
+    //             autoClose: 1000,
+    //             hideProgressBar: false,
+    //             closeOnClick: true,
+    //             pauseOnHover: true,
+    //             draggable: true,
+    //             progress: undefined,
+    //             theme: "colored",
+    //             });
+    //     } 
 
-        else{
-            axios.post(`${process.env.REACT_APP_API_URL}/order/createOrder/${props._id}`,
-            {
-                userId: props.userId,
-                userEmail: props.userEmail,
+    //     else{
+    //         axios.post(`${process.env.REACT_APP_API_URL}/order/createOrder/${props._id}`,
+    //         {
+    //             userId: props.userId,
+    //             userEmail: props.userEmail,
     
-                productId: props.productId,
-                productName: props.productName,
-                productDescription: props.productDescription,
-                price: props.price,
-                quantity: quantityLocal,
-                totalAmount: quantityLocal * props.price,
-                image:props.image
-            },
+    //             productId: props.productId,
+    //             productName: props.productName,
+    //             productDescription: props.productDescription,
+    //             price: props.price,
+    //             quantity: quantityLocal,
+    //             totalAmount: quantityLocal * props.price,
+    //             image:props.image
+    //         },
         
-            {
-                headers:{
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            }
-            )
-            .then(response=>{
-                // console.log(response);
-                if(response.data.status === "failed"){
-                    toast.error(`Error! ${response.data.message}`, {
-                        position: "top-center",
-                        autoClose: 1000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
-                        });
-                }
-                else if(response.data.status === "success"){
-                    toast.success(`Order has been created! Thank you for your order!`, {
-                        position: "top-center",
-                        autoClose: 1000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
-                        });
-                        setIsUpdated(previous => !previous)
+    //         {
+    //             headers:{
+    //                 Authorization: `Bearer ${localStorage.getItem('token')}`
+    //             }
+    //         }
+    //         )
+    //         .then(response=>{
+    //             // console.log(response);
+    //             if(response.data.status === "failed"){
+    //                 toast.error(`Error! ${response.data.message}`, {
+    //                     position: "top-center",
+    //                     autoClose: 1000,
+    //                     hideProgressBar: false,
+    //                     closeOnClick: true,
+    //                     pauseOnHover: true,
+    //                     draggable: true,
+    //                     progress: undefined,
+    //                     theme: "colored",
+    //                     });
+    //             }
+    //             else if(response.data.status === "success"){
+    //                 toast.success(`Order has been created! Thank you for your order!`, {
+    //                     position: "top-center",
+    //                     autoClose: 1000,
+    //                     hideProgressBar: false,
+    //                     closeOnClick: true,
+    //                     pauseOnHover: true,
+    //                     draggable: true,
+    //                     progress: undefined,
+    //                     theme: "colored",
+    //                     });
+    //                     setIsUpdated(previous => !previous)
                         
-                }   
-            })
-        }
-    }
-    else{
-        toast.error(`Log in first to create an order!`, {
-            position: "top-center",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
-    }
+    //             }   
+    //         })
+    //     }
+    // }
+    // else{
+    //     toast.error(`Log in first to create an order!`, {
+    //         position: "top-center",
+    //         autoClose: 1000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "colored",
+    //         });
+    // }
 
 
     }
