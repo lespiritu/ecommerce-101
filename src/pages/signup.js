@@ -169,7 +169,7 @@ export default function Signup(){
 
 
                 <Button disabled={btnDisabled} variant="dark"  type="submit">
-                    Log-In
+                    Submit
                 </Button>
             </Form>
             
@@ -181,7 +181,7 @@ export default function Signup(){
                 <Modal.Footer>
               
                 <Button variant="dark" onClick={handleClose}>
-                    Submit
+                    Login
                 </Button>
                 </Modal.Footer>
             </Modal>
