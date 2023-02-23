@@ -15,6 +15,8 @@ import axios from 'axios';
 
 // component function
 export default function NavBar(){
+    const logo = 'https://res.cloudinary.com/dbed2fwkj/image/upload/v1677127544/samples/ecommerse101-sample/web-images/logo-1_vqfsyc.png'
+
     const navigate = useNavigate();
     const {user, setUser} = useContext(UserContext)
 
@@ -60,7 +62,7 @@ export default function NavBar(){
             <Navbar bg="dark" variant='dark' sticky="top" >
                     <Container>
                          <Navbar.Brand  as = {NavLink} to="/">
-                            Brand Name
+                            <img height={50}  src={logo} alt='logo'/>
                         </Navbar.Brand>
 
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
