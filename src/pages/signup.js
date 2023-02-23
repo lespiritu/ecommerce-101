@@ -181,7 +181,7 @@ export default function Signup(){
                 <Modal.Footer>
               
                 <Button variant="dark" onClick={handleClose}>
-                    Login
+                    Submit
                 </Button>
                 </Modal.Footer>
             </Modal>
