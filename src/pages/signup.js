@@ -11,7 +11,7 @@ import axios from 'axios';
 import UserContext from '../context/userContext';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function Signup(){
@@ -186,7 +186,7 @@ export default function Signup(){
                 </Modal.Footer>
             </Modal>
 
-            <ToastContainer/>
+  
         </div>
         </>
     )

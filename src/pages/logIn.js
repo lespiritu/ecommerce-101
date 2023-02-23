@@ -8,7 +8,7 @@ import UserContext from "../context/userContext";
 
 import { Navigate, useNavigate } from "react-router-dom";
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import axios from "axios";
 
@@ -132,7 +132,7 @@ export default function LogIn(){
                 </Button>
             </Form>
 
-            <ToastContainer/>
+            
   
         </div>
     )

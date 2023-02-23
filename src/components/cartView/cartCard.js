@@ -24,15 +24,19 @@ export default function CartCard(props){
                         <p>Price: ₱{price} <span style={{color:"orangered", fontWeight:"bold"}}>Total: ₱{totalAmount}</span></p>
                         <p className='pt-2 '>Quantity</p>
                         <div >
-                            <Form onClick={(event)=>createOrder(event,quantityLocal, props)}  className='bottom-control'>
-                            <Form.Control className='controler quantity ' 
                             
-                                type="number"
-                                value={quantityLocal}
-                                required
-                                min={1}
-                                onChange={(event)=>setQuantityLocal(event.target.value)}
-                            />
+                            <Form onSubmit={(event)=>createOrder(event,quantityLocal, props)}  className='bottom-control'>
+                            <Form.Group  controlId="formBasicQuantity">
+                                <Form.Control className='controler quantity ' 
+                                
+                                    type="number"
+                                    value={quantityLocal}
+                                    required
+                                    min={1}
+                                    onChange={(event)=>setQuantityLocal(event.target.value)}
+                                />
+                            </Form.Group>
+
                             <Button type='submit' className='controler checkout' variant="secondary">Check-Out</Button>
                             </Form>  
                             
