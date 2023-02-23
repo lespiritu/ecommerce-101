@@ -28,7 +28,7 @@ export default function ProductList(){
         <>
 
             <div className="allProducts">
-          
+            
                 {allProducts}
                 
         
