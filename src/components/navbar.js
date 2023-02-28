@@ -62,32 +62,32 @@ export default function NavBar(){
             <Navbar bg="dark" variant='dark' sticky="top" >
                     <Container>
                          <Navbar.Brand  as = {NavLink} to="/">
-                            <img height={50}  src={logo} alt='logo'/>
+                            <img height={40}  src={logo} alt='logo'/>
                         </Navbar.Brand>
 
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ms-auto ">
-                                <Nav.Link as = {NavLink} to="/">Home</Nav.Link>
+                                <Nav.Link className='text-nav'  as = {NavLink} to="/">Home</Nav.Link>
                                 {!user && 
                                     <>
-                                    <Nav.Link as = {NavLink} to="login">Login</Nav.Link>
-                                    <Nav.Link  as = {NavLink} to="signup">Signup</Nav.Link>
+                                    <Nav.Link className='text-nav' as = {NavLink} to="login">Login</Nav.Link>
+                                    <Nav.Link className='text-nav'  as = {NavLink} to="signup">Signup</Nav.Link>
                                     </>
                                 }
                                 
                               {user && 
                                 <Nav>
                                   {!user.isAdmin && <Nav.Link as ={Link} to ='/cartView'> <IconCart className='icon-cart'/></Nav.Link>}
-                                    <NavDropdown title={`Hi ${ user.fullName}`} id="basic-nav-dropdown">
-                                        {user.isAdmin && <NavDropdown.Item as ={Link} to ="/adminDashBoard/viewProducts">Dashboard</NavDropdown.Item>}
+                                    <NavDropdown className='text-nav' title={`Hi ${ user.fullName}`} id="basic-nav-dropdown">
+                                        {user.isAdmin && <NavDropdown.Item className='text-nav' as ={Link} to ="/adminDashBoard/viewProducts">Dashboard</NavDropdown.Item>}
                                         
-                                        {!user.isAdmin && <NavDropdown.Item as={Link} to = "/cartView">View Cart</NavDropdown.Item>}
-                                        {!user.isAdmin && <NavDropdown.Item as={Link} to = "/ViewOrdersList">Orders</NavDropdown.Item>}
+                                        {!user.isAdmin && <NavDropdown.Item  className='text-nav'as={Link} to = "/cartView">View Cart</NavDropdown.Item>}
+                                        {!user.isAdmin && <NavDropdown.Item className='text-nav' as={Link} to = "/ViewOrdersList">Orders</NavDropdown.Item>}
                                 
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item onClick={event=> logOut(event)} as = {Link} to="/">LogOut</NavDropdown.Item>
+                                        <NavDropdown.Item className='text-nav' onClick={event=> logOut(event)} as = {Link} to="/">LogOut</NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
                               }
